@@ -14,15 +14,15 @@
   
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1e40af;
-      --secondary: #06b6d4;
-      --accent: #8b5cf6;
+      --primary: #ec4899;
+      --primary-dark: #be185d;
+      --secondary: #f9a8d4;
+      --accent: #fbcfe8;
       --dark: #1e293b;
-      --light: #f1f5f9;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --light: #fce7f3;
+      --gradient-1: linear-gradient(135deg, #fce7f3 0%, #ec4899 100%);
+      --gradient-2: linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%);
+      --gradient-3: linear-gradient(135deg, #fce7f3 0%, #fda4af 100%);
     }
 
     * { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
@@ -49,7 +49,23 @@
     .member-card .nim { color: #64748b; font-size: 0.95rem; }
 
     .bg-light-section { background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); }
-    footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+    footer {
+      background: var(--gradient-1);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      box-shadow: 0 -5px 30px rgba(236, 72, 153, 0.2);
+    }
+
+    footer h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      opacity: 0.95;
+      margin: 0;
+    }
 
     .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
     .scroll-reveal.active { opacity: 1; transform: translateY(0); }
@@ -73,7 +89,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html#beranda">Beranda</a></li>
           <li class="nav-item"><a class="nav-link active" href="anggota.html">Anggota</a></li>
-                  <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+                  <li class="nav-item"><a class="nav-link" href="biodata.html">Biodata</a></li>
 
         </ul>
       </div>
