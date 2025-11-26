@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorium Fisika Medik & Spektroskopi</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #06b6d4;
+      --accent: #8b5cf6;
+      --dark: #1e293b;
+      --light: #f1f5f9;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary) !important;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(5px);
+    }
+
+    .nav-link {
+      color: var(--dark) !important;
+      font-weight: 500;
+      transition: all 0.3s;
+      padding: 0.5rem 1.2rem !important;
+      margin: 0 0.2rem;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary) !important;
+      background: var(--light);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-1);
+      color: white;
+      padding: 10rem 2rem 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      left: -10%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      animation: float 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(30px, 30px) rotate(5deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .hero .subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+
+    .btn-hero {
+      background: white;
+      color: var(--primary);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-hero:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      color: var(--primary);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 4rem;
+      font-size: 1.1rem;
+    }
+
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      background: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient-1);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Research Cards */
+    .research-card {
+      padding: 2rem;
+      position: relative;
+    }
+
+    .research-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: var(--gradient-3);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+    }
+
+    .research-card h5 {
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .research-card p {
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    /* Icon Cards */
+    .icon-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .icon-card .icon-wrapper {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      border-radius: 20px;
+      background: var(--gradient-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(245, 87, 108, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .icon-card:hover .icon-wrapper {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .icon-card i {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .icon-card h5 {
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Feature Cards with Gradient */
+    .feature-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-card .feature-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card .feature-icon i {
+      color: white;
+      font-size: 2rem;
+    }
+
+    .feature-card h4 {
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Background Sections */
+    .bg-light-section {
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .bg-gradient-section {
+      background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    }
+
+    /* Category Badge */
+    .category-badge {
+      background: var(--gradient-2);
+      color: white;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+    }
+
+    /* Maps */
+    .map-container {
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-content h5 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-content p {
+      opacity: 0.8;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease;
+    }
+
+    /* Stats Section */
+    .stats-card {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .navbar-brand span {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Scroll reveal animation */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .scroll-reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#beranda">
+        <img src="images/Logo-Resmi-Unhas-1.png" alt="Logo UNHAS" height="45">
+        <span>Lab Fisika Medik & Spektroskopi</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#beranda">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="anggota.html">Anggota</a></li>
+        <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="beranda" class="hero">
+    <div class="hero-content">
+      <div class="container">
+        <h1>Laboratorium Fisika Medik & Spektroskopi</h1>
+        <p class="subtitle">Departemen Fisika | Universitas Hasanuddin</p>
+        <a href="#profil" class="btn-hero">Jelajahi Lebih Lanjut</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profil Section -->
+  <section id="profil" class="bg-light-section">
+    <div class="container">
+      <h2 class="section-title">Profil Laboratorium</h2>
+      <p class="section-subtitle">Pusat unggulan penelitian fisika medik dan spektroskopi</p>
+      
+      <div class="row align-items-center g-5 mb-5">
+        <div class="col-lg-6 scroll-reveal">
+          <img src="https://www.shutterstock.com/image-photo/pharmaceutical-laboratory-young-male-scientist-600nw-2556717801.jpg" alt="Laboratorium" class="img-fluid rounded shadow-lg" style="border-radius: 25px !important;">
+        </div>
+        <div class="col-lg-6 scroll-reveal">
+          <p class="lead mb-4" style="line-height: 1.9;">
+Laboratorium Fisika Medik dan Spektroskopi adalah laboratorium unggulan yang terdapat di Departemen Fisika FMIPA Universitas Hasanuddin, yang memfokuskan pada penerapan ilmu fisika dalam bidang kesehatan, radiologi, dan analisis struktur materi.          </p>
+          <p class="lead" style="line-height: 1.9;">
+Laboratorium ini mendukung berbagai kegiatan, termasuk pendidikan, penelitian, dan pengabdian kepada masyarakat, khususnya dalam bidang fisika medik dan spektroskopi modern. Melalui kombinasi antara kajian teoretis dan eksperimen, laboratorium ini berfungsi sebagai sarana bagi mahasiswa untuk mempelajari interaksi antara radiasi dan materi biologis.          </p>
+        </div>
+      </div>
+  </section>
+
+  <!-- Visi Misi Section -->
+<section id="visi-misi" class="bg-gradient-section">
+    <div class="container">
+        <h2 class="section-title text-center">Visi & Misi</h2>
+        <p class="section-subtitle text-center">Mendukung inovasi dan pengembangan ilmu pengetahuan melalui penelitian berbasis teknologi</p>
+        
+        <div class="row g-4">
+            <!-- Visi Card -->
+            <div class="col-md-6">
+                <div class="card feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <h4>Visi</h4>
+                    <p style="line-height: 1.8;">Menjadi pusat penelitian terdepan di bidang Fisika Medik dan Spektroskopi yang berfokus pada pemanfaatan teknologi terkini untuk peningkatan kesehatan masyarakat, dengan komitmen untuk mendukung riset berbasis sains dan inovasi teknologi yang memberi dampak positif bagi dunia medis.</p>
+                </div>
+            </div>
+
+            <!-- Misi Card -->
+            <div class="col-md-6">
+                <div class="card feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="bi bi-flag"></i>
+                    </div>
+                    <h4>Misi</h4>
+                    <ul style="line-height: 1.8;">
+                        <li class="mb-2">Melakukan riset terapan yang mengintegrasikan ilmu fisika dengan teknologi medis terbaru</li>
+                        <li class="mb-2">Meningkatkan kolaborasi dengan universitas dan rumah sakit dalam mengembangkan aplikasi teknologi medis yang bermanfaat</li>
+                        <li class="mb-2">Memberikan pelatihan berkualitas kepada mahasiswa dan profesional medis dalam bidang fisika dan teknik medis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <!-- Penelitian Section -->
+  <section id="penelitian">
+    <div class="container">
+      <h2 class="section-title">Jenis Penelitian S1</h2>
+      <p class="section-subtitle">Radioterapi dan Radiodiagnostik</p>
+      
+      <div class="text-center mb-5"> </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card research-card scroll-reveal">
+            <div class="research-number">1</div>
+            <h5>Task Transfer Function</h5>
+            <p>Analisis task transfer function berdasarkan nilai linearitas CT number dan CNR menggunakan phantom AAPM dan ACR</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card research-card scroll-reveal">
+            <div class="research-number">2</div>
+            <h5>Teknik Standar Dose vs Low Dose</h5>
+            <p>Pengaruh teknik standar dose dan low dose terhadap keluaran radiasi dan kualitas citra pada pemeriksaan CT-Scan kepala</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card research-card scroll-reveal">
+            <div class="research-number">3</div>
+            <h5>Estimasi Nilai CTR</h5>
+            <p>Estimasi nilai CTR terhadap variasi FFD dan kolimasi pada pemeriksaan thorax</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card research-card scroll-reveal">
+            <div class="research-number">4</div>
+            <h5>Low Contrast & Noise Ratio</h5>
+            <p>Analisis nilai low contrast dan noise ratio citra pasien plak koroner menggunakan IndQCT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bidang Kajian Section -->
+  <section id="bidang" class="bg-gradient-section">
+    <div class="container">
+      <h2 class="section-title">Bidang Kajian Utama</h2>
+      <p class="section-subtitle">Dua pilar utama penelitian kami</p>
+      
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="feature-card scroll-reveal">
+            <div class="feature-icon">
+              <i class="bi bi-heart-pulse"></i>
+            </div>
+            <h4>Fisika Medik</h4>
+            <p class="mb-3">Mengkaji penerapan fisika dalam dunia kesehatan dan radiologi:</p>
+            <ul style="line-height: 1.8;">
+              <li>Interaksi radiasi dengan jaringan biologis</li>
+              <li>Radiologi diagnostik (CT-Scan, X-ray, fluoroskopi)</li>
+              <li>Radioterapi dan proteksi radiasi</li>
+              <li>Pengukuran dosis dan dosimetri</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="feature-card scroll-reveal">
+            <div class="feature-icon">
+              <i class="bi bi-rainbow"></i>
+            </div>
+            <h4>Spektroskopi</h4>
+            <p class="mb-3">Mempelajari karakteristik materi melalui interaksi gelombang elektromagnetik:</p>
+            <ul style="line-height: 1.8;">
+              <li>Spektroskopi UV-Vis</li>
+              <li>Spektroskopi IR (Infrared)</li>
+              <li>Spektroskopi Raman</li>
+              <li>Spektroskopi fluoresensi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fasilitas Section -->
+  <section id="fasilitas">
+    <div class="container">
+      <h2 class="section-title">Fasilitas Laboratorium</h2>
+      <p class="section-subtitle">Peralatan modern untuk penelitian berkualitas</p>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-radioactive"></i>
+            </div>
+            <h5>Alat Ukur Radiasi</h5>
+            <p>Ion Chamber, Survey Meter, GM Counter, Dosimeter (TLD, film badge), Sumber radiasi aman (Cs-137, Co-60)</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-reception-4"></i>
+            </div>
+            <h5>Spektroskopi</h5>
+            <p>Spektrofotometer UV-Vis, Spektrometer Raman, Perangkat FTIR</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-laptop"></i>
+            </div>
+            <h5>Komputasi</h5>
+            <p>Sistem komputer untuk simulasi dan pengolahan data (ImageJ, MATLAB), Ruang praktikum dan riset</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kegiatan Section -->
+  <section id="kegiatan" class="bg-light-section">
+    <div class="container">
+      <h2 class="section-title">Kegiatan Laboratorium</h2>
+      <p class="section-subtitle">Aktivitas akademik dan pengabdian masyarakat</p>
+      
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-book"></i>
+            </div>
+            <h5>Praktikum</h5>
+            <p>Praktikum rutin mahasiswa Fisika dan Fisika Medik</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-search"></i>
+            </div>
+            <h5>Penelitian</h5>
+            <p>Penelitian dosen dan mahasiswa (skripsi, tesis)</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h5>Pelatihan</h5>
+            <p>Pelatihan proteksi radiasi dan dosimetri</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="card icon-card scroll-reveal">
+            <div class="icon-wrapper">
+              <i class="bi bi-people"></i>
+            </div>
+            <h5>Kolaborasi</h5>
+            <p>Kerja sama dengan rumah sakit dan instansi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lokasi Section -->
+  <section id="lokasi">
+    <div class="container">
+      <h2 class="section-title">Lokasi Laboratorium</h2>
+      <p class="section-subtitle">Kunjungi kami di kampus Universitas Hasanuddin</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="map-container scroll-reveal">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1807.709607572597!2d119.48523743518749!3d-5.132666918910382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefb8c3aa414f7%3A0x59585e28c7ee3ebc!2sFakultas%20Matematika%20dan%20Ilmu%20Pengetahuan%20Alam%20UNHAS!5e0!3m2!1sid!2sid!4v1764122885234!5m2!1sid!2sid" 
+              width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <h5>Laboratorium Fisika Medik & Spektroskopi</h5>
+      <p>&copy; 2025 Universitas Hasanuddin. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+  <!-- Scroll reveal animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const revealElements = document.querySelectorAll('.scroll-reveal');
+      const revealOnScroll = () => {
+        revealElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight) {
+            el.classList.add('active');
+          }
+        });
+      };
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+    });
+  </script>
+</body>
+</html>
